@@ -14,9 +14,9 @@
  * * getPromise(num) function must be exported
  * Example: export const getPromise(num) => return <Your code of promise>
 */ 
-export const getPromise = () => {
+export const getPromise = (num) => {
   // Your code goes here...
-
+  return (num === Math.floor(num)) ? new Promise((res) => { res(num); }) : 0
 };
 
 
@@ -33,9 +33,14 @@ export const getPromise = () => {
  * * Returns the sum value
  * * if you have solved it successfully, the updateSumValue() function will return the value of 10;
 */
-export const  updateSumValue = () => {
+export const updateSumValue = () => {
   // Your code goes here...
-  
+  let sum = 2;
+  const promise = getPromise(120);
+  promise 
+    .then((response) => sum + response);
+  sum += 8;
+  return sum;
 }
 
 

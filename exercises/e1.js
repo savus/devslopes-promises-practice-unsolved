@@ -15,7 +15,17 @@
  */
 
 // Your code goes here
+export const getPromise = new Promise((fulfilled, unfulfilled) => {
+   setTimeout(() => {
+      fulfilled('The PROMISE was RESOLVED');
+   }, 1000)
+});
 
+getPromise 
+   .then((onFulfilled) => {
+      console.log(onFulfilled);
+      return onFulfilled;
+   });
 
 
 // === TEST YOURSELF ===
