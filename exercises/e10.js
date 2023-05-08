@@ -58,12 +58,12 @@ export const result3 = Promise.allSettled(promiseArr)
   .then((results) => {
     const newArr = [];
     results.forEach((result) => {
-      newArr.push(
-          {
-            'status' : result.status,
-            'value' : (result.status === "rejected") ? result.reason : result.value
-          }
-        );
+      const obj = {'status' : result.status};
+      const valueOrReason = (result.status === 'rejected') 
+        ? ['reason', result.reason] 
+        : ['value', result.value];
+      obj[valueOrReason[0]] = valueOrReason[1];
+      newArr.push(obj);
     });
     console.log(newArr);
     return newArr;
