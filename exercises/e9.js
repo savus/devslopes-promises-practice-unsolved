@@ -13,7 +13,8 @@
 
 export function iterate(arg) {
   // Your code goes here...
-  
+  console.log(arg);
+  return arg + 1;
 }
 
 /**
@@ -24,7 +25,14 @@ export function iterate(arg) {
 
 export function alwaysThrows() {
   // Your code goes here...
-
+  /*
+    Spent hours trying to interpret what 'throw' and 'error' meant
+    when the .reject() method, console.log() method, and 'return' didn't work.
+    Had to research 'throw' keyword. Couldn't understand expectations of
+    "expect(alwaysThrows).toThrow(new Error('OH NOES'));" error message until
+    this combination finally worked.
+  */
+  throw new Error('OH NOES');
 }
 
 /**
@@ -36,9 +44,9 @@ export function alwaysThrows() {
  * The function must be exported
  */
 
-export function onReject() {
+export function onReject(arg) {
   // Your code goes here...
-
+  console.log(`${(typeof arg === 'object') ? arg.message : arg}`);
 }
 
 /**
@@ -63,10 +71,20 @@ export function onReject() {
  */
 
 // Your code goes here...
-export const promise;
-
-
-
+export const promise = Promise.resolve((res) => res)
+  .then((first) => iterate(0)) // <-- This passes whether it starts at 1 or 0 [0, 1, 2, 3, 4, OH NOES] => passed
+  .then((second) => iterate(second))
+  .then((third) => iterate(third))
+  .then((fourth) => iterate(fourth))
+  .then((fifth) => iterate(fifth))
+  .then((afterFifth) => alwaysThrows())
+  .then((sixth) => iterate(5))
+  .then((seventh) => iterate(seventh))
+  .then((eighth) => iterate(eighth))
+  .then((ninth) => iterate(ninth))
+  .then((tenth) => iterate(tenth))
+  .catch((err) => onReject(err));
+  
 // === TEST YOURSELF ===
 // Once you're finished run the test with "npm run test-9"
 // If the test has all tests passed, switch to the next exercise file
