@@ -58,16 +58,12 @@ const getData = (url) => fetch(url);
 
 // Your code goes here ...
 export const result = getData(usersUrl)
-  .then((response) => {
-    console.log(response);
-    return response.json();
-  })
-  .then((parsed) => {
-    console.log(parsed);
-    return parsed;
-  })
-  .then((data) => getLoginList(data))
-  .catch((e) => console.log(e));
+  .then((response) => response.json())
+  .then((data) => {
+    const result = getLoginList(data);
+    console.log(result);
+    return result;
+  });
 
 
 

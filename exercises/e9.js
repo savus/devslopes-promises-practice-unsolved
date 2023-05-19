@@ -46,7 +46,7 @@ export function alwaysThrows() {
 
 export function onReject(arg) {
   // Your code goes here...
-  console.log(`${(typeof arg === 'object') ? arg.message : arg}`);
+  console.log(arg.message || arg);
 }
 
 /**
@@ -71,19 +71,18 @@ export function onReject(arg) {
  */
 
 // Your code goes here...
-export const promise = Promise.resolve((res) => res)
-  .then((first) => iterate(0)) // <-- This passes whether it starts at 1 or 0 [0, 1, 2, 3, 4, OH NOES] => passed
-  .then((second) => iterate(second))
-  .then((third) => iterate(third))
-  .then((fourth) => iterate(fourth))
-  .then((fifth) => iterate(fifth))
-  .then((afterFifth) => alwaysThrows())
-  .then((sixth) => iterate(5))
-  .then((seventh) => iterate(seventh))
-  .then((eighth) => iterate(eighth))
-  .then((ninth) => iterate(ninth))
-  .then((tenth) => iterate(tenth))
-  .catch((err) => onReject(err));
+export const promise = Promise.resolve(iterate(1))
+  .then(iterate)
+  .then(iterate)
+  .then(iterate)
+  .then(iterate)
+  .then(alwaysThrows)
+  .then(iterate)
+  .then(iterate)
+  .then(iterate)
+  .then(iterate)
+  .then(iterate)
+  .catch(onReject);
   
 // === TEST YOURSELF ===
 // Once you're finished run the test with "npm run test-9"

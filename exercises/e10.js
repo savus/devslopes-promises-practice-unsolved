@@ -55,19 +55,11 @@ export const result2 = Promise.any(promiseArr)
  */
 
 export const result3 = Promise.allSettled(promiseArr)
-  .then((results) => {
-    const newArr = [];
-    results.forEach((result) => {
-      const obj = {'status' : result.status};
-      const valueOrReason = (result.status === 'rejected') 
-        ? ['reason', result.reason] 
-        : ['value', result.value];
-      obj[valueOrReason[0]] = valueOrReason[1];
-      newArr.push(obj);
-    });
-    console.log(newArr);
-    return newArr;
-  }); // Your code here
+  .then((res) => {
+    console.log(res);
+    return res;
+  })
+   // Your code here
 
 /**
  * @task
@@ -79,9 +71,7 @@ export const result3 = Promise.allSettled(promiseArr)
  */
 
 export const newPromiseArr = promiseArr
-  .map((promise) => (promise !== promise4) 
-    ? new Promise((res, rej) => setTimeout(res, 3000)) 
-    : Promise.resolve('RESOLVED AGAIN')); // Your code here
+  .filter((promise) => promise !== promise2 && promise !== promise3); // Your code here
 
 // Do NOT refactor or update result 4, it's all set to work
 export const result4 = Promise.race(newPromiseArr)
